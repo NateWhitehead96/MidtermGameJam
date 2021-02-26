@@ -13,6 +13,7 @@ public class WalkOverScript : MonoBehaviour
             {
                 other.gameObject.GetComponent<PlayerBehaviour>().ResetPosition();
             }
+            
         }
     }
 }

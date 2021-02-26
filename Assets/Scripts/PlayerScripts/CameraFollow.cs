@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
-    public Transform player;
+    public Transform playerCube;
     private Vector3 offset;
     // Start is called before the first frame update
     void Start()
@@ -15,8 +15,8 @@ public class CameraFollow : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position = player.position + offset;
-        if(FindObjectOfType<PlayerBehaviour>().myColor == PlayerColor.RED)
+        transform.position = playerCube.position + offset;
+        if (FindObjectOfType<PlayerBehaviour>().myColor == PlayerColor.RED)
         {
             Camera.main.backgroundColor = Color.red;
         }

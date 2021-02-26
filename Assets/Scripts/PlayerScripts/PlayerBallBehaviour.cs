@@ -3,20 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public enum PlayerColor
-{
-    RED,
-    YELLOW,
-    GREEN,
-    BLUE
-}
-
-public class PlayerBehaviour : MonoBehaviour
+public class PlayerBallBehaviour : MonoBehaviour
 {
     public Transform Spawn;
     private Rigidbody rigidbody;
     private MeshRenderer mesh;
-    private Animator animator;
+    //private Animator animator;
     public PlayerColor myColor;
     public Material[] colorMaterials;
     [SerializeField] bool isJumping = false;
@@ -29,55 +21,54 @@ public class PlayerBehaviour : MonoBehaviour
     {
         rigidbody = GetComponent<Rigidbody>();
         mesh = GetComponent<MeshRenderer>();
-        animator = GetComponent<Animator>();
+        //animator = GetComponent<Animator>();
         isJumping = false;
-        myColor = PlayerColor.RED;
+        myColor = FindObjectOfType<PlayerBehaviour>().myColor;
     }
     void Start()
     {
-       if(myColor == PlayerColor.RED)
-       {
-           mesh.material = colorMaterials[0];
-       }
-       if (myColor == PlayerColor.YELLOW)
-       {
-           mesh.material = colorMaterials[1];
-       }
-       if (myColor == PlayerColor.GREEN)
-       {
-           mesh.material = colorMaterials[2];
-       }
-       if (myColor == PlayerColor.BLUE)
-       {
-           mesh.material = colorMaterials[3];
-       }
+        myColor = FindObjectOfType<PlayerBehaviour>().myColor;
+        if (myColor == PlayerColor.RED)
+        {
+            mesh.material = colorMaterials[0];
+        }
+        if (myColor == PlayerColor.YELLOW)
+        {
+            mesh.material = colorMaterials[1];
+        }
+        if (myColor == PlayerColor.GREEN)
+        {
+            mesh.material = colorMaterials[2];
+        }
+        if (myColor == PlayerColor.BLUE)
+        {
+            mesh.material = colorMaterials[3];
+        }
     }
 
     public void OnMove(InputValue value)
     {
         moveVector = value.Get<Vector2>();
-        animator.SetBool("Moving", true);
-        //print("working");
+        print("working");
     }
 
     public void OnJump(InputValue pressed)
     {
-       
-        if(pressed.isPressed)
+
+        if (pressed.isPressed)
         {
             isJumping = true;
-            animator.SetBool("Jumping", true);
-            animator.SetBool("Moving", false);
+            //animator.SetBool("Jumping", true);
         }
         rigidbody.AddForce(Vector3.up * jumpPower);
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.CompareTag("Ground"))
+        if (collision.gameObject.CompareTag("Ground"))
         {
             isJumping = false;
-            animator.SetBool("Jumping", false);
+            //animator.SetBool("Jumping", false);
         }
     }
 
@@ -85,10 +76,7 @@ public class PlayerBehaviour : MonoBehaviour
     void Update()
     {
         transform.position = new Vector3(transform.position.x + moveVector.x * moveSpeed * Time.deltaTime, transform.position.y, transform.position.z + moveVector.y * moveSpeed * Time.deltaTime);
-        if(moveVector.x == 0 && moveVector.y == 0)
-        {
-            animator.SetBool("Moving", false);
-        }
+
     }
 
     public void SetPlayerColor(PlayerColor newColor)

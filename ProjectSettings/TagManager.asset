@@ -9,6 +9,7 @@ TagManager:
   - Yellow
   - Green
   - Blue
+  - DeathPlane
   layers:
   - Default
   - TransparentFX
