@@ -16,9 +16,10 @@ public class PlayerBehaviour : MonoBehaviour
     public Transform Spawn;
     private Rigidbody rigidbody;
     private MeshRenderer mesh;
+    private Animator animator;
     public PlayerColor myColor;
     public Material[] colorMaterials;
-    [SerializeField] bool isJumping;
+    [SerializeField] bool isJumping = false;
     [SerializeField] float jumpPower;
     [SerializeField] float moveSpeed;
     [SerializeField] Vector2 moveVector;
@@ -28,6 +29,7 @@ public class PlayerBehaviour : MonoBehaviour
     {
         rigidbody = GetComponent<Rigidbody>();
         mesh = GetComponent<MeshRenderer>();
+        animator = GetComponent<Animator>();
         isJumping = false;
         myColor = PlayerColor.RED;
     }
@@ -63,6 +65,7 @@ public class PlayerBehaviour : MonoBehaviour
         if(pressed.isPressed)
         {
             isJumping = true;
+            animator.SetBool("Jumping", true);
         }
         rigidbody.AddForce(Vector3.up * jumpPower);
     }
@@ -72,6 +75,7 @@ public class PlayerBehaviour : MonoBehaviour
         if(collision.gameObject.CompareTag("Ground"))
         {
             isJumping = false;
+            animator.SetBool("Jumping", false);
         }
     }
 

@@ -15,6 +15,11 @@ public class ButtonBehaviour : MonoBehaviour
         SceneManager.LoadScene("Controls");
     }
 
+    public void OnBack()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
+
     public void OnExit()
     {
         Application.Quit();
