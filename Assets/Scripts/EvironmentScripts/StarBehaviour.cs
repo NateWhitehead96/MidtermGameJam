@@ -10,9 +10,14 @@ public class StarBehaviour : MonoBehaviour
     {
         if(other.gameObject.CompareTag("Player"))
         {
-            SceneManager.LoadScene(nextLevel);
-
+            StartCoroutine(Fading());
         }
         // show some UI to go to next level but for now just insta port there
+    }
+    IEnumerator Fading()
+    {
+        FindObjectOfType<FadeTransitions>().PlayFadeOut();
+        yield return new WaitForSeconds(1.5f);
+        SceneManager.LoadScene(nextLevel);
     }
 }

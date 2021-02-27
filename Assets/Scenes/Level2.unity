@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 714a271e2107d284da91cc141d97c7ef, type: 2}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
@@ -203,6 +203,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 500524936277349494, guid: 975a3973f013ba3408e8cfeb97294ce5, type: 3}
+      propertyPath: m_Color.b
+      value: 0.032395888
+      objectReference: {fileID: 0}
+    - target: {fileID: 500524936277349494, guid: 975a3973f013ba3408e8cfeb97294ce5, type: 3}
+      propertyPath: m_Color.g
+      value: 0.032395888
+      objectReference: {fileID: 0}
+    - target: {fileID: 500524936277349494, guid: 975a3973f013ba3408e8cfeb97294ce5, type: 3}
+      propertyPath: m_Color.r
+      value: 0.9811321
+      objectReference: {fileID: 0}
     - target: {fileID: 4621360327610666349, guid: 975a3973f013ba3408e8cfeb97294ce5, type: 3}
       propertyPath: m_Name
       value: PlayerTimer
@@ -291,6 +303,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4621360328363050429, guid: 975a3973f013ba3408e8cfeb97294ce5, type: 3}
+      propertyPath: starColors.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300000, guid: 38a33a4e20a1a9b4198c83a70b211f80, type: 3}
+    - target: {fileID: 4621360328363050429, guid: 975a3973f013ba3408e8cfeb97294ce5, type: 3}
+      propertyPath: starColors.Array.data[1]
+      value: 
+      objectReference: {fileID: 21300000, guid: 74eb5cfcc6b170345837cae6014a6a6a, type: 3}
+    - target: {fileID: 4621360328363050429, guid: 975a3973f013ba3408e8cfeb97294ce5, type: 3}
+      propertyPath: starColors.Array.data[2]
+      value: 
+      objectReference: {fileID: 21300000, guid: bc7924ab83e202b4b8dd6094733eeb4e, type: 3}
+    - target: {fileID: 4621360328363050429, guid: 975a3973f013ba3408e8cfeb97294ce5, type: 3}
+      propertyPath: starColors.Array.data[3]
+      value: 
+      objectReference: {fileID: 21300000, guid: a41a3654a7df8a94fade875fda40855d, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 975a3973f013ba3408e8cfeb97294ce5, type: 3}
 --- !u!1 &413708264
