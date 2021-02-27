@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CameraFollow : MonoBehaviour
 {
@@ -31,6 +32,10 @@ public class CameraFollow : MonoBehaviour
         if (FindObjectOfType<PlayerBehaviour>().myColor == PlayerColor.BLUE)
         {
             Camera.main.backgroundColor = Color.blue;
+        }
+        if (SceneManager.GetSceneByName("BossLevel") == SceneManager.GetActiveScene())
+        {
+            Camera.main.backgroundColor = Color.black;
         }
     }
 }

@@ -23,6 +23,8 @@ public class PlayerBehaviour : MonoBehaviour
     [SerializeField] float jumpPower;
     [SerializeField] float moveSpeed;
     [SerializeField] Vector2 moveVector;
+
+    public Canvas PauseCanvas;
     // Start is called before the first frame update
 
     private void Awake()
@@ -35,6 +37,7 @@ public class PlayerBehaviour : MonoBehaviour
     }
     void Start()
     {
+        PauseCanvas.gameObject.SetActive(false);
        if(myColor == PlayerColor.RED)
        {
            mesh.material = colorMaterials[0];
@@ -62,14 +65,22 @@ public class PlayerBehaviour : MonoBehaviour
 
     public void OnJump(InputValue pressed)
     {
-       
-        if(pressed.isPressed)
+        if (!isJumping)
         {
-            isJumping = true;
-            animator.SetBool("Jumping", true);
-            animator.SetBool("Moving", false);
+            if (pressed.isPressed)
+            {
+                isJumping = true;
+                animator.SetBool("Jumping", true);
+                animator.SetBool("Moving", false);
+                rigidbody.AddForce(Vector3.up * jumpPower);
+            }
         }
-        rigidbody.AddForce(Vector3.up * jumpPower);
+    }
+
+    public void OnPause()
+    {
+        PauseCanvas.gameObject.SetActive(true);
+        Time.timeScale = 0;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -78,8 +89,16 @@ public class PlayerBehaviour : MonoBehaviour
         {
             isJumping = false;
             animator.SetBool("Jumping", false);
+            //transform.parent.position = collision.gameObject.transform.position;       
         }
     }
+    //private void OnCollisionExit(Collision collision)
+    //{
+    //    if (collision.gameObject.CompareTag("Ground"))
+    //    {
+    //        transform.parent = null;
+    //    }
+    //}
 
     // Update is called once per frame
     void Update()

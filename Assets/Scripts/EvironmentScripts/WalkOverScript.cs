@@ -16,4 +16,15 @@ public class WalkOverScript : MonoBehaviour
             
         }
     }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            if (collision.gameObject.GetComponent<PlayerBehaviour>().myColor != objectColor) // if the player is not the right color send him back to spawn
+            {
+                collision.gameObject.GetComponent<PlayerBehaviour>().ResetPosition();
+            }
+
+        }
+    }
 }
