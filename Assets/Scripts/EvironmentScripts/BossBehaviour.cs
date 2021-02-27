@@ -7,18 +7,18 @@ public class BossBehaviour : MonoBehaviour
 {
     public Transform player;
     [SerializeField] float speed;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    private Vector3 offset;
 
+    private void Start()
+    {
+        offset = new Vector3(0, 1.8f, 0);
+    }
     // Update is called once per frame
     void Update()
     {
         if(transform.position.x < 100)
         {
-            transform.position = Vector3.MoveTowards(transform.position, player.position, speed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, player.position + offset, speed * Time.deltaTime);
 
         }
     }
@@ -27,7 +27,15 @@ public class BossBehaviour : MonoBehaviour
     {
         if(other.gameObject.CompareTag("Player")) // if caught by the boss reset the level
         {
-            SceneManager.LoadScene("BossLevel");
+            StartCoroutine(Death());
+            //SceneManager.LoadScene("BossLevel");
         }
+    }
+    IEnumerator Death()
+    {
+        FindObjectOfType<PlayerBehaviour>().deathEffect.Play();
+        FindObjectOfType<PlayerBehaviour>().dying = true;
+        yield return new WaitForSeconds(1.5f);
+        SceneManager.LoadScene("BossLevel");
     }
 }

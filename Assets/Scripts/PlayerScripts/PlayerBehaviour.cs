@@ -19,10 +19,12 @@ public class PlayerBehaviour : MonoBehaviour
     private Animator animator;
     public PlayerColor myColor;
     public Material[] colorMaterials;
+    public ParticleSystem deathEffect;
     [SerializeField] bool isJumping = false;
     [SerializeField] float jumpPower;
     [SerializeField] float moveSpeed;
     [SerializeField] Vector2 moveVector;
+    public bool dying;
 
     public Canvas PauseCanvas;
     // Start is called before the first frame update
@@ -37,8 +39,10 @@ public class PlayerBehaviour : MonoBehaviour
     }
     void Start()
     {
-        PauseCanvas.gameObject.SetActive(false);
-       if(myColor == PlayerColor.RED)
+       PauseCanvas.gameObject.SetActive(false);
+       deathEffect.Stop();
+        dying = false;
+       if (myColor == PlayerColor.RED)
        {
            mesh.material = colorMaterials[0];
        }
@@ -103,10 +107,13 @@ public class PlayerBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position = new Vector3(transform.position.x + moveVector.x * moveSpeed * Time.deltaTime, transform.position.y, transform.position.z + moveVector.y * moveSpeed * Time.deltaTime);
-        if(moveVector.x == 0 && moveVector.y == 0)
+        if (!dying)
         {
-            animator.SetBool("Moving", false);
+            transform.position = new Vector3(transform.position.x + moveVector.x * moveSpeed * Time.deltaTime, transform.position.y, transform.position.z + moveVector.y * moveSpeed * Time.deltaTime);
+            if (moveVector.x == 0 && moveVector.y == 0)
+            {
+                animator.SetBool("Moving", false);
+            }
         }
     }
 
@@ -137,5 +144,7 @@ public class PlayerBehaviour : MonoBehaviour
     public void ResetPosition()
     {
         transform.position = Spawn.position;
+        deathEffect.Stop();
+        dying = false;
     }
 }

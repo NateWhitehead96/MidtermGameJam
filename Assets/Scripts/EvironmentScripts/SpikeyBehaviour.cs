@@ -23,8 +23,16 @@ public class SpikeyBehaviour : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            collision.gameObject.GetComponent<PlayerBehaviour>().ResetPosition();
+            StartCoroutine(Death());
+            //collision.gameObject.GetComponent<PlayerBehaviour>().ResetPosition();
         }
         
+    }
+    IEnumerator Death()
+    {
+        FindObjectOfType<PlayerBehaviour>().deathEffect.Play();
+        FindObjectOfType<PlayerBehaviour>().dying = true;
+        yield return new WaitForSeconds(1.5f);
+        FindObjectOfType<PlayerBehaviour>().ResetPosition();
     }
 }

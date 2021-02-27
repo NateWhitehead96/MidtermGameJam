@@ -8,11 +8,19 @@ public class HazardBehaviour : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Player"))
         {
-            collision.gameObject.GetComponent<PlayerBehaviour>().ResetPosition();
+            StartCoroutine(Death());
+            //collision.gameObject.GetComponent<PlayerBehaviour>().ResetPosition();
         }
         else if(collision.gameObject.CompareTag("DeathPlane"))
         {
             Destroy(gameObject);
         }
+    }
+    IEnumerator Death()
+    {
+        FindObjectOfType<PlayerBehaviour>().deathEffect.Play();
+        FindObjectOfType<PlayerBehaviour>().dying = true;
+        yield return new WaitForSeconds(1.5f);
+        FindObjectOfType<PlayerBehaviour>().ResetPosition();
     }
 }

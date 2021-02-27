@@ -11,7 +11,8 @@ public class WalkOverScript : MonoBehaviour
         {
             if(other.gameObject.GetComponent<PlayerBehaviour>().myColor != objectColor) // if the player is not the right color send him back to spawn
             {
-                other.gameObject.GetComponent<PlayerBehaviour>().ResetPosition();
+                StartCoroutine(Death());
+                //other.gameObject.GetComponent<PlayerBehaviour>().ResetPosition();
             }
             
         }
@@ -22,9 +23,18 @@ public class WalkOverScript : MonoBehaviour
         {
             if (collision.gameObject.GetComponent<PlayerBehaviour>().myColor != objectColor) // if the player is not the right color send him back to spawn
             {
-                collision.gameObject.GetComponent<PlayerBehaviour>().ResetPosition();
+                StartCoroutine(Death());
+                //collision.gameObject.GetComponent<PlayerBehaviour>().ResetPosition();
             }
 
         }
+    }
+
+    IEnumerator Death()
+    {
+        FindObjectOfType<PlayerBehaviour>().deathEffect.Play();
+        FindObjectOfType<PlayerBehaviour>().dying = true;
+        yield return new WaitForSeconds(1.5f);
+        FindObjectOfType<PlayerBehaviour>().ResetPosition();
     }
 }
